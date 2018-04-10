@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include sebco *.css
+recursive-include sebco *.csv
+recursive-include sebco *.html
+recursive-include sebco *.ico
+recursive-include sebco *.js
+recursive-include sebco *.json
+recursive-include sebco *.md
+recursive-include sebco *.png
+recursive-include sebco *.py
+recursive-include sebco *.svg
+recursive-include sebco *.txt
+recursive-exclude sebco *.pyc
