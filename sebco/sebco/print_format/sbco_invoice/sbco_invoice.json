@@ -1,0 +1,22 @@
+{
+ "align_labels_right": 0, 
+ "creation": "2018-04-29 13:42:38.139766", 
+ "custom_format": 0, 
+ "disabled": 0, 
+ "doc_type": "Sales Invoice", 
+ "docstatus": 0, 
+ "doctype": "Print Format", 
+ "font": "Default", 
+ "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\" align=\\\"center\\\">\\t\\t\\t\\t<h2>Sales Invoice<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"posting_date\", \"label\": \"Date\"}, {\"print_hide\": 0, \"fieldname\": \"company_trn\", \"label\": \"Company TRN\"}, {\"print_hide\": 0, \"fieldname\": \"due_date\", \"label\": \"Payment Due Date\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Customer\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"customer_name\", \"label\": \"Customer Name\"}, {\"print_hide\": 0, \"fieldname\": \"address_display\", \"label\": \"Address\"}, {\"print_hide\": 0, \"fieldname\": \"contact_display\", \"label\": \"Contact\"}, {\"print_hide\": 0, \"fieldname\": \"contact_mobile\", \"label\": \"Mobile No\"}, {\"print_hide\": 0, \"fieldname\": \"tax_id\", \"label\": \"Tax Id\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"label\": \"Custom HTML\", \"fieldname\": \"_custom_html\", \"options\": \"<div>\\n<p>Dear Sir,\\n\\tThis is the Invoice for the month of {{ doc.posting_date or \\\"\\\" }} for the below mentioned table.</p>\\n</div>\", \"fieldtype\": \"HTML\"}, {\"visible_columns\": [{\"print_hide\": 0, \"fieldname\": \"item_code\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"qty\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"uom\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"rate\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"amount\", \"print_width\": \"\"}], \"print_hide\": 0, \"fieldname\": \"items\", \"label\": \"Items\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"total\", \"label\": \"Total\"}, {\"print_hide\": 0, \"fieldname\": \"base_total_taxes_and_charges\", \"label\": \"Total Taxes and Charges (Company Currency)\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"grand_total\", \"label\": \"Grand Total\"}, {\"print_hide\": 0, \"fieldname\": \"in_words\", \"label\": \"In Words\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Terms\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"terms\", \"label\": \"Terms and Conditions Details\"}]", 
+ "idx": 0, 
+ "line_breaks": 0, 
+ "modified": "2018-04-30 12:25:43.241653", 
+ "modified_by": "Administrator", 
+ "module": "Sebco", 
+ "name": "SBCO Invoice", 
+ "owner": "Administrator", 
+ "print_format_builder": 1, 
+ "print_format_type": "Server", 
+ "show_section_headings": 0, 
+ "standard": "Yes"
+}
