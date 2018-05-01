@@ -1,0 +1,22 @@
+{
+ "align_labels_right": 0, 
+ "creation": "2018-05-01 21:01:44.795184", 
+ "custom_format": 0, 
+ "disabled": 0, 
+ "doc_type": "Appraisal", 
+ "docstatus": 0, 
+ "doctype": "Print Format", 
+ "font": "Default", 
+ "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Appraisal<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"kra_template\", \"label\": \"Appraisal Template\"}, {\"print_hide\": 0, \"fieldname\": \"employee\", \"label\": \"For Employee\"}, {\"print_hide\": 0, \"fieldname\": \"employee_name\", \"label\": \"For Employee Name\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"status\", \"label\": \"Status\"}, {\"print_hide\": 0, \"fieldname\": \"start_date\", \"label\": \"Start Date\"}, {\"print_hide\": 0, \"fieldname\": \"end_date\", \"label\": \"End Date\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Goals\"}, {\"fieldtype\": \"Column Break\"}, {\"visible_columns\": [{\"print_hide\": 0, \"fieldname\": \"kra\", \"print_width\": \"240px\"}, {\"print_hide\": 0, \"fieldname\": \"per_weightage\", \"print_width\": \"70px\"}, {\"print_hide\": 0, \"fieldname\": \"score\", \"print_width\": \"70px\"}, {\"print_hide\": 0, \"fieldname\": \"score_earned\", \"print_width\": \"70px\"}], \"print_hide\": 0, \"fieldname\": \"goals\", \"label\": \"Goals\"}, {\"print_hide\": 0, \"fieldname\": \"calculate_total_score\", \"label\": \"Calculate Total Score\"}, {\"print_hide\": 0, \"fieldname\": \"total_score\", \"label\": \"Total Score (Out of 5)\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"remarks\", \"label\": \"Remarks\"}]", 
+ "idx": 0, 
+ "line_breaks": 0, 
+ "modified": "2018-05-01 21:08:28.716340", 
+ "modified_by": "Administrator", 
+ "module": "Sebco", 
+ "name": "Inter Eval Form", 
+ "owner": "Administrator", 
+ "print_format_builder": 1, 
+ "print_format_type": "Server", 
+ "show_section_headings": 0, 
+ "standard": "Yes"
+}
