@@ -1,0 +1,23 @@
+{
+ "align_labels_right": 0, 
+ "creation": "2018-05-03 18:03:37.466092", 
+ "custom_format": 0, 
+ "default_print_language": "en", 
+ "disabled": 0, 
+ "doc_type": "Annual Employment", 
+ "docstatus": 0, 
+ "doctype": "Print Format", 
+ "font": "Default", 
+ "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Annual Employment<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Current\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"dept_manager\", \"label\": \"Dept Manager\"}, {\"print_hide\": 0, \"fieldname\": \"name1\", \"label\": \"Name\"}, {\"visible_columns\": [{\"print_hide\": 0, \"fieldname\": \"employee\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"employee_name\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"job_title\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"dept_manager_decision\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"hr_notes\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"date\", \"print_width\": \"\"}], \"print_hide\": 0, \"fieldname\": \"employee_activity_detail\", \"label\": \"Employee Activity Detail\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Specifications\"}, {\"fieldtype\": \"Column Break\"}, {\"visible_columns\": [{\"print_hide\": 0, \"fieldname\": \"vacant_job\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"date_of_plenum\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"number_in_demand\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"specification_will_be_in\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"specifications\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"notes\", \"print_width\": \"\"}], \"print_hide\": 0, \"fieldname\": \"specifications\", \"label\": \"Specifications\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"hr_manager_decision\", \"label\": \"HR Manager Decision\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"executive_manager_decision\", \"label\": \"Executive Manager Decision\"}, {\"print_hide\": 0, \"fieldname\": \"notes\", \"label\": \"Notes\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"workflow_state\", \"label\": \"Workflow State\"}, {\"print_hide\": 0, \"fieldname\": \"signatures\", \"label\": \"Signatures\"}, {\"print_hide\": 0, \"fieldname\": \"rejected_reason\", \"label\": \"Rejected Reason\"}]", 
+ "idx": 0, 
+ "line_breaks": 0, 
+ "modified": "2018-05-03 18:05:00.236813", 
+ "modified_by": "Administrator", 
+ "module": "Sebco", 
+ "name": "Annual Employment", 
+ "owner": "Administrator", 
+ "print_format_builder": 0, 
+ "print_format_type": "Server", 
+ "show_section_headings": 0, 
+ "standard": "Yes"
+}
