@@ -1,0 +1,22 @@
+{
+ "align_labels_right": 0, 
+ "creation": "2018-05-03 17:17:50.089865", 
+ "custom_format": 0, 
+ "disabled": 0, 
+ "doc_type": "Employee", 
+ "docstatus": 0, 
+ "doctype": "Print Format", 
+ "font": "Default", 
+ "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Employee Health Insurance<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"employee_name\", \"label\": \"Full Name\"}, {\"print_hide\": 0, \"fieldname\": \"employee_number\", \"label\": \"Employee Number\"}, {\"fieldtype\": \"Column Break\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Medical\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"insurance_number\", \"label\": \"Insurance Number\"}, {\"print_hide\": 0, \"fieldname\": \"insurance_company\", \"label\": \"Insurance Company\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"insurance_class\", \"label\": \"Insurance Class\"}, {\"print_hide\": 0, \"fieldname\": \"insurance_expiry\", \"label\": \"Insurance Expiry\"}]", 
+ "idx": 0, 
+ "line_breaks": 0, 
+ "modified": "2018-05-03 18:50:34.846989", 
+ "modified_by": "Administrator", 
+ "module": "Sebco", 
+ "name": "Health Insurance", 
+ "owner": "Administrator", 
+ "print_format_builder": 1, 
+ "print_format_type": "Server", 
+ "show_section_headings": 0, 
+ "standard": "Yes"
+}

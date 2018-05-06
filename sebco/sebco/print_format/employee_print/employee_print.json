@@ -1,0 +1,22 @@
+{
+ "align_labels_right": 0, 
+ "creation": "2018-04-30 13:59:12.636579", 
+ "custom_format": 0, 
+ "disabled": 0, 
+ "doc_type": "Employee", 
+ "docstatus": 0, 
+ "doctype": "Print Format", 
+ "font": "Default", 
+ "format_data": "[{\"fieldname\": \"print_heading_template\", \"fieldtype\": \"Custom HTML\", \"options\": \"<div class=\\\"print-heading\\\">\\t\\t\\t\\t<h2>Employee<br><small>{{ doc.name }}</small>\\t\\t\\t\\t</h2></div>\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"image\", \"label\": \"Image\"}, {\"print_hide\": 0, \"fieldname\": \"employee_name\", \"label\": \"Full Name\"}, {\"print_hide\": 0, \"fieldname\": \"arabic_name\", \"label\": \"Arabic Name\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"fieldname\": \"employee_number\", \"label\": \"Employee Number\"}, {\"print_hide\": 0, \"fieldname\": \"residency_number\", \"label\": \"National / Residency Number\"}, {\"fieldtype\": \"Section Break\", \"label\": \"Employee\"}, {\"fieldtype\": \"Column Break\"}, {\"visible_columns\": [{\"print_hide\": 0, \"fieldname\": \"current_location\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"from\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"till\", \"print_width\": \"\"}, {\"print_hide\": 0, \"fieldname\": \"under_project\", \"print_width\": \"\"}], \"print_hide\": 0, \"fieldname\": \"employee_location_detail\", \"label\": \"Employee Location Detail\"}, {\"fieldtype\": \"Section Break\", \"label\": \"\"}, {\"fieldtype\": \"Column Break\"}, {\"print_hide\": 0, \"options\": \" {%- for row in doc.attachment_details -%}\\n<div>\\n  <table width=\\\"100%\\\">\\n    <tr>\\n     <td>Attachment Name</td>\\n     <td>Attachment</td>\\n    </tr>\\n    <tr>\\n     <td>{{ row.attachment_name or \\\"\\\" }}</td>\\n     <td><img src=\\\"{{ row.attachment or \\\"\\\" }}\\\" /></td>\\n    </tr>\\n  </table>\\n</div>\\n<div class=\\\"page-break\\\"></div>\\n {%- endfor -%}\", \"fieldname\": \"_custom_html\", \"fieldtype\": \"HTML\", \"label\": \"Custom HTML\"}]", 
+ "idx": 0, 
+ "line_breaks": 0, 
+ "modified": "2018-04-30 15:40:37.434528", 
+ "modified_by": "Administrator", 
+ "module": "Sebco", 
+ "name": "Employee Print", 
+ "owner": "Administrator", 
+ "print_format_builder": 1, 
+ "print_format_type": "Server", 
+ "show_section_headings": 0, 
+ "standard": "Yes"
+}
