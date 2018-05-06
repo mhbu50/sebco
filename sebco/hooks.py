@@ -82,7 +82,7 @@ doctype_js = {"Sales Order" : "public/js/sales_order.js",
 
 doc_events = {
 	"Sales Order": {
-		"on_update": "sebco.sebco.tools.rename_activity_type",
+		"validate": "sebco.sebco.tools.rename_activity_type",
 
 	}
 }
