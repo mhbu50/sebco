@@ -7,9 +7,13 @@ import frappe
 from frappe.model.document import Document
 
 class Agreement(Document):
-	def before_insert(self):
+	def after_insert(self):
 		frappe.get_doc({
 	        "doctype": "Project",
 	        "project_name": self.customer,
 	        "status": "Open",
+			"customer":self.customer,
+			"agreement":self.name,
+			"expected_start_date":self.start_date,
+			"expected_end_date":self.end_date
 	    }).save()
