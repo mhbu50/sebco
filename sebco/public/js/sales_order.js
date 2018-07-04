@@ -6,6 +6,7 @@ frappe.ui.form.on("Sales Order", {
           var new_row = frm.add_child("activity_type");
           new_row.activity_type = value.item_name;
           new_row.billing_rate = value.rate;
+					new_row.costing_rate = value.rate;
       });
       refresh_field("activity_type");
     }
@@ -27,6 +28,7 @@ frappe.ui.form.on("Sales Order", {
 					var new_row = frm.add_child("activity_type");
 					new_row.activity_type = value.activity_type;
 					new_row.billing_rate = value.billing_rate;
+					new_row.costing_rate = value.costing_rate;
 			});
 			refresh_field("activity_type");
 		}

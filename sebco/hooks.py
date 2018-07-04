@@ -83,12 +83,12 @@ doctype_js = {"Sales Order" : "public/js/sales_order.js",
 # ---------------
 # Hook on document methods and events
 
-doc_events = {
-	"Sales Order": {
-		"validate": "sebco.sebco.tools.rename_activity_type",
-
-	}
-}
+# doc_events = {
+# 	"Sales Order": {
+# 		"validate": "sebco.sebco.tools.rename_activity_type",
+#
+# 	}
+# }
 
 # Scheduled Tasks
 # ---------------

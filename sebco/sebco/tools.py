@@ -8,13 +8,13 @@ from frappe.model.document import Document
 from frappe.desk.notifications import get_filters_for
 
 
-@frappe.whitelist()
-def rename_activity_type(doc, method):
-    for at in doc.activity_type:
+# @frappe.whitelist()
+# def rename_activity_type(doc, method):
+#     for at in doc.activity_type:
         # print "\n 1 doc.activity_type = {} \n".format(frappe.as_json(doc.activity_type))
-        if doc.name not in at.activity_type:
-            at.name = doc.name +"-"+ at.activity_type
-            at.activity_type = doc.name +"-"+ at.activity_type
+        # if doc.name not in at.activity_type:
+        #     at.name = doc.name +"-"+ at.activity_type
+        #     at.activity_type = doc.name +"-"+ at.activity_type
             # print "at.activity_type = {}".format(at.activity_type)
             # print " 2 activity_type = {}".format(frappe.as_json(doc.activity_type))
 

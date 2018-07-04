@@ -2,6 +2,7 @@ frappe.ui.form.on("Timesheet", {
   setup:function(frm) {
   },
   onload: function(frm) {
+    frm.set_value("project",frm.doc.customer);
     cur_frm.set_query("customer_po", function() {
        return {
            "filters": {
@@ -9,8 +10,6 @@ frappe.ui.form.on("Timesheet", {
            }
        };
    });
-
-
  },
  validate: function(frm) {
    frappe.call({
@@ -21,6 +20,7 @@ frappe.ui.form.on("Timesheet", {
      },
    		callback: function (data) {
    			console.log(data);
+        frm.set_value("project",data.message.customer);
         data.message.activity_type.forEach(function(row){
           $.each(frm.doc.time_logs, function( index, value ) {
             console.log("value.activity_type",value.activity_type);

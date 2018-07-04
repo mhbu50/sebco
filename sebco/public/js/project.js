@@ -3,6 +3,7 @@ frappe.ui.form.on('Project', {
       dashboard_link_doctype(frm, "Quotation");
       frappe.route_options = {
   			"customer": frm.doc.name,
+        "project": frm.doc.name,
   			}
     }
   });
