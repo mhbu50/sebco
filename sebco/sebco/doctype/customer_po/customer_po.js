@@ -12,6 +12,8 @@ frappe.ui.form.on('Customer PO', {
 				frappe.model.with_doctype('Sales Order', function() {
 					var doc = frappe.model.get_new_doc('Sales Order');
 					doc.customer = frm.doc.customer;
+					doc.customer_po = frm.doc.name;
+					doc.date_po = frm.doc.date;
 					$.each(activity_type, function(i, d) {
 						var row = frappe.model.add_child(doc, "activity_type");
 						row.activity_type = d.activity_type;

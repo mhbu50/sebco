@@ -1,6 +1,9 @@
 frappe.ui.form.on('Project', {
     refresh: function(frm) {
       dashboard_link_doctype(frm, "Quotation");
+      frappe.route_options = {
+  			"customer": frm.doc.name,
+  			}
     }
   });
 
