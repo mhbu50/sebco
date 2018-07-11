@@ -26,13 +26,14 @@ frappe.ui.form.on("Timesheet", {
    });
  },
  validate: function(frm) {
-   console.log("validate");
-   console.log("doc",frm.doc);
-   $.each(frm.doc.earning, function(index, value) {
-     console.log("value=" ,value);
-     frappe.model.set_value(value.doctype,value.name,"timesheet",frm.doc.name);
-   });
-   frm.save();
+  if(frm.doc.docstatus != 1){
+    $.each(frm.doc.earning, function(index, value) {
+      frappe.model.set_value(value.doctype,value.name,"timesheet",frm.doc.name);
+    });
+    $.each(frm.doc.deduction, function(index, value) {
+      frappe.model.set_value(value.doctype,value.name,"timesheet",frm.doc.name);
+    });
+
    frappe.call({
      "method": "frappe.client.get",
      args: {
@@ -40,7 +41,6 @@ frappe.ui.form.on("Timesheet", {
        name: frm.doc.customer_po
      },
    		callback: function (data) {
-   			console.log(data);
         frm.set_value("project",data.message.customer);
         data.message.activity_type.forEach(function(row){
           $.each(frm.doc.time_logs, function( index, value ) {
@@ -56,6 +56,7 @@ frappe.ui.form.on("Timesheet", {
     		});
    		}
    });
+ }
  },
  overtime_hours:function(frm){
    frm.trigger("clc_overTime");
