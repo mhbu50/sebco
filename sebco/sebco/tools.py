@@ -8,16 +8,6 @@ from frappe.model.document import Document
 from frappe.desk.notifications import get_filters_for
 
 
-# @frappe.whitelist()
-# def rename_activity_type(doc, method):
-#     for at in doc.activity_type:
-        # print "\n 1 doc.activity_type = {} \n".format(frappe.as_json(doc.activity_type))
-        # if doc.name not in at.activity_type:
-        #     at.name = doc.name +"-"+ at.activity_type
-        #     at.activity_type = doc.name +"-"+ at.activity_type
-            # print "at.activity_type = {}".format(at.activity_type)
-            # print " 2 activity_type = {}".format(frappe.as_json(doc.activity_type))
-
 @frappe.whitelist()
 def get_open_count(doctype, name, links):
 	'''Get open count for given transactions and filters
@@ -56,7 +46,7 @@ def get_open_count(doctype, name, links):
 
 		filters = get_filters_for(d)
 		fieldname = links.get('non_standard_fieldnames', {}).get(d, links.fieldname)
-        #return fieldname
+
 		data = {'name': d}
 		if filters:
 			# get the fieldname for the current document
@@ -80,3 +70,42 @@ def get_open_count(doctype, name, links):
 		out['timeline_data'] = module.get_timeline_data(doctype, name)
 
 	return out
+
+def get_timesheets(start, end):
+	timesheets = frappe.get_list("Timesheet", fields=["*"], filters={"docstatus":"1",
+		"month_date": ["between", [start, end]]})
+	return timesheets
+
+@frappe.whitelist()
+def add_overtime_to_salaryslip(posting_date, start, end):
+	timesheets = get_timesheets(start, end)
+	# 	print "timesheets = {}".format(frappe.as_json(timesheets))
+	for t in timesheets:
+		print "t.employee = {}".format(t.employee)
+		ss = frappe.get_list("Salary Slip", fields=["*"], filters={
+			"posting_date": posting_date, "status": "draft", "employee": t.employee})[0]
+		print "\n\n ss name = {}".format(ss.name)
+		print "\n\n t.overtime_total = {}".format(t.overtime_total)
+		print "\n\nt = {}".format(frappe.as_json(t))
+		timesheet = frappe.get_doc("Timesheet",t.name)
+		print "timesheet.name = {}".format(frappe.as_json(timesheet.name))
+
+		earning = frappe.get_list("Timesheet Addition", fields=["*"], filters={
+			"timesheet": timesheet.name})
+		print "earning = {}".format(frappe.as_json(earning))
+		for e in earning:
+			sd1 = frappe.get_doc({"doctype": "Salary Detail","salary_component": "Over Time", "amount": e.amount})
+			print "\n\n\sd1 = {}\n\n\n".format(sd1)
+			salary = frappe.get_doc("Salary Slip", ss.name)
+			salary.append("earnings", sd1)
+			salary.save()
+		deduction = frappe.get_list("Timesheet Addition", fields=["*"], filters={
+			"timesheet": timesheet.name})
+		for d in deduction:
+			sd2 = frappe.get_doc({"doctype": "Salary Detail","salary_component": "Absent", "amount": d.amount})
+			print "\n\n\n sd2 = {}\n\n\n\n".format("sd2")
+			salary.append("deductions", sd2)
+			salary.save()
+		frappe.db.commit()
+		frappe.msgprint(_("OverTime/Absents are added to all Salary Slips"))
+	# 	frappe.msgprint(_("OverTime/Absents are added to all Salary Slips"))
