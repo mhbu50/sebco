@@ -85,8 +85,8 @@ def add_overtime_to_salaryslip(posting_date, start, end):
 		ss = frappe.get_list("Salary Slip", fields=["*"], filters={
 			"posting_date": posting_date, "status": "draft", "employee": t.employee})[0]
 		print "\n\n ss name = {}".format(ss.name)
-		print "\n\n t.overtime_total = {}".format(t.overtime_total)
-		print "\n\nt = {}".format(frappe.as_json(t))
+		# print "\n\n t.overtime_total = {}".format(t.overtime_total)
+		# print "\n\nt = {}".format(frappe.as_json(t))
 		timesheet = frappe.get_doc("Timesheet",t.name)
 		print "timesheet.name = {}".format(frappe.as_json(timesheet.name))
 
@@ -97,6 +97,7 @@ def add_overtime_to_salaryslip(posting_date, start, end):
 			sd1 = frappe.get_doc({"doctype": "Salary Detail","salary_component": "Over Time", "amount": e.amount})
 			print "\n\n\sd1 = {}\n\n\n".format(sd1)
 			salary = frappe.get_doc("Salary Slip", ss.name)
+			print "salary 1 = {}".format(frappe.as_json(salary))
 			salary.append("earnings", sd1)
 			salary.save()
 		deduction = frappe.get_list("Timesheet Addition", fields=["*"], filters={
@@ -105,7 +106,7 @@ def add_overtime_to_salaryslip(posting_date, start, end):
 			sd2 = frappe.get_doc({"doctype": "Salary Detail","salary_component": "Absent", "amount": d.amount})
 			print "\n\n\n sd2 = {}\n\n\n\n".format("sd2")
 			salary.append("deductions", sd2)
+			print "salary 2 = {}".format(frappe.as_json(salary))
 			salary.save()
 		frappe.db.commit()
 		frappe.msgprint(_("OverTime/Absents are added to all Salary Slips"))
-	# 	frappe.msgprint(_("OverTime/Absents are added to all Salary Slips"))

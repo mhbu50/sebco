@@ -6,7 +6,7 @@ frappe.ui.form.on("Timesheet", {
   					type: "earning"
   				}
   			}
-  		})
+  		});
   		frm.set_query("salary_component", "deduction", function() {
   			return {
   				filters: {
@@ -27,11 +27,8 @@ frappe.ui.form.on("Timesheet", {
  },
  validate: function(frm) {
    console.log("validate");
-   $.each(frm.doc.earning, function(index, value) {
-     console.log("value=" ,value);
-     frappe.model.set_value(value.doctype,value.name,"timesheet",frm.doc.name);
-   });
-   frm.save();
+
+
    frappe.call({
      "method": "frappe.client.get",
      args: {
@@ -54,6 +51,13 @@ frappe.ui.form.on("Timesheet", {
 				});
     		});
    		}
+   });
+
+   $.each(frm.doc.earning, function(index, value) {
+     frappe.model.set_value(value.doctype,value.name,"timesheet",frm.doc.name);
+   });
+   $.each(frm.doc.deduction, function(index, value) {
+     frappe.model.set_value(value.doctype,value.name,"timesheet",frm.doc.name);
    });
  },
  overtime_hours:function(frm){
