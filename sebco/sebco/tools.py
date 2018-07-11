@@ -101,6 +101,11 @@ def add_overtime_to_salaryslip(posting_date, start, end):
 			# print "salary 1 = {}".format(frappe.as_json(salary))
 			salary.append("earnings", sd1)
 			salary.save()
+			#flag Timesheet Addition
+			ta = frappe.get_doc("Timesheet Addition",e.name)
+			ta.flag = 1
+			ta.save()
+
 		deduction = frappe.get_list("Timesheet Deduction", fields=["*"], filters={
 			"timesheet": timesheet.name})
 		for d in deduction:
@@ -109,5 +114,10 @@ def add_overtime_to_salaryslip(posting_date, start, end):
 			salary.append("deductions", sd2)
 			# print "salary 2 = {}".format(frappe.as_json(salary))
 			salary.save()
+			#flag Timesheet Deduction
+			td = frappe.get_doc("Timesheet Deduction",d.name)
+			td.flag = 1
+			td.save()
+
 		frappe.db.commit()
 	frappe.msgprint(_("OverTime/Absents are added to all Salary Slips"))

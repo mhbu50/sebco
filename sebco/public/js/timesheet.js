@@ -6,7 +6,7 @@ frappe.ui.form.on("Timesheet", {
   					type: "earning"
   				}
   			}
-  		});
+  		})
   		frm.set_query("salary_component", "deduction", function() {
   			return {
   				filters: {
@@ -16,7 +16,7 @@ frappe.ui.form.on("Timesheet", {
   		})
   	},
   onload: function(frm) {
-    frm.set_value("project",frm.doc.customer);
+    //frm.set_value("project",frm.doc.customer);
     cur_frm.set_query("customer_po", function() {
        return {
            "filters": {
@@ -27,8 +27,12 @@ frappe.ui.form.on("Timesheet", {
  },
  validate: function(frm) {
    console.log("validate");
-
-
+   console.log("doc",frm.doc);
+   $.each(frm.doc.earning, function(index, value) {
+     console.log("value=" ,value);
+     frappe.model.set_value(value.doctype,value.name,"timesheet",frm.doc.name);
+   });
+   frm.save();
    frappe.call({
      "method": "frappe.client.get",
      args: {
@@ -52,23 +56,14 @@ frappe.ui.form.on("Timesheet", {
     		});
    		}
    });
-
-   $.each(frm.doc.earning, function(index, value) {
-     frappe.model.set_value(value.doctype,value.name,"timesheet",frm.doc.name);
-   });
-   $.each(frm.doc.deduction, function(index, value) {
-     frappe.model.set_value(value.doctype,value.name,"timesheet",frm.doc.name);
-   });
  },
  overtime_hours:function(frm){
    frm.trigger("clc_overTime");
  },
  rate:function (frm) {
-   console.log("3333");
   frm.trigger("clc_overTime");
  },
  clc_overTime:function(frm){
-
    frm.set_value("overtime_total",frm.doc.overtime_hours * frm.doc.rate);
    frm.refresh_fields("overtime_total");
  },
@@ -80,7 +75,6 @@ frappe.ui.form.on("Timesheet", {
    frm.trigger("clc_absent");
   },
   clc_absent:function(frm){
-
     frm.set_value("absent_total",frm.doc.absent_days * frm.doc.absent_rate);
     frm.refresh_fields("absent_total");
   },
