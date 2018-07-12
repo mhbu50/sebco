@@ -119,3 +119,19 @@ def add_overtime_to_salaryslip(posting_date, start, end):
 	#	clear_cache('Salary Slip')
 	#frappe.reload_doctype('Salary Slip')
 	frappe.msgprint(_("OverTime/Absents are added to all Salary Slips"))
+
+def before_insert_item(doc, method):
+	msgprint("call me")
+	frappe.get_doc({
+	"doctype": "Activity Type",
+	"activity_type": doc.item_name}).save()
+
+def disabled_agreemnt_po():
+	#Agreement
+	agreements = frappe.get_list("Agreement",filters={"end_date":today,"status":"Active")},fields=["*"])
+	for a in agreements:
+		frappe.set_value(a.doctype, a.name, 'status','Disabled')
+	#Customer PO
+	customer_pos = frappe.get_list("Customer PO",filters={"end_date":today,"status":"Active")},fields=["*"])
+	for po in customer_pos:
+		frappe.set_value(po.doctype, po.name, 'status','Disabled')

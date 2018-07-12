@@ -20,7 +20,8 @@ frappe.ui.form.on("Timesheet", {
     cur_frm.set_query("customer_po", function() {
        return {
            "filters": {
-               "customer": frm.doc.customer
+               "customer": frm.doc.customer,
+               "status":"Active"
            }
        };
    });

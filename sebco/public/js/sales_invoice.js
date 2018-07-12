@@ -12,8 +12,9 @@ frappe.ui.form.on("Sales Invoice", {
              var due_days = data.message.due_days;
              var after_add = frappe.datetime.add_days(frappe.datetime.nowdate(), due_days);
              console.log("due_days = "+ after_add + " after_add = "+ after_add);
-             frappe.set_value("due_date",after_add);
+             frm.set_value("due_date",after_add);
              frm.refresh_field("due_date");
+             frm.toggle_enable("due_date", false);
 
   				}
   			}

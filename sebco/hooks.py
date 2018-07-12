@@ -84,23 +84,23 @@ doctype_js = {"Sales Order" : "public/js/sales_order.js",
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"Sales Order": {
-# 		"validate": "sebco.sebco.tools.rename_activity_type",
-#
-# 	}
-# }
+doc_events = {
+	"Item": {
+		"before_insert": "sebco.sebco.tools.before_insert_item",
+
+	}
+}
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
 # 	"all": [
 # 		"sebco.tasks.all"
 # 	],
-# 	"daily": [
-# 		"sebco.tasks.daily"
-# 	],
+	"daily": [
+		"sebco.sebco.tools.disabled_agreemnt_po"
+	]
 # 	"hourly": [
 # 		"sebco.tasks.hourly"
 # 	],
@@ -110,7 +110,7 @@ doctype_js = {"Sales Order" : "public/js/sales_order.js",
 # 	"monthly": [
 # 		"sebco.tasks.monthly"
 # 	]
-# }
+}
 
 # Testing
 # -------
