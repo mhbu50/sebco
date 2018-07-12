@@ -82,37 +82,39 @@ def add_overtime_to_salaryslip(posting_date, start, end):
 	# 	print "timesheets = {}".format(frappe.as_json(timesheets))
 	for t in timesheets:
 		print "t.employee = {}".format(t.employee)
-		ss = frappe.get_list("Salary Slip", fields=["*"], filters={
-			"posting_date": posting_date, "status": "draft", "employee": t.employee})[0]
-		print "\nss name = {}".format(ss.name)
-		# print "\n\n t.overtime_total = {}".format(t.overtime_total)
-		# print "\n\nt = {}".format(frappe.as_json(t))
-		timesheet = frappe.get_doc("Timesheet",t.name)
-		#print "timesheet.name = {}".format(frappe.as_json(timesheet.name))
+		ss = (frappe.get_list("Salary Slip", fields=["*"], filters={
+			"posting_date": posting_date, "status": "draft", "employee": t.employee}) or [None])[0]
+		print "\nss name = {}".format(frappe.as_json(ss))
+		if ss:
 
-		earning = frappe.get_list("Timesheet Addition", fields=["*"],filters = [["timesheet","=",timesheet.name],["flag","not in",["1"]]])
-		print "earning = {}".format(frappe.as_json(earning))
-		for e in earning:
-			sd1 = frappe.get_doc({"doctype": "Salary Detail","salary_component": e.salary_component, "amount": e.amount})
-			#print "ss.name  = {}".format(ss.name)
-			salary = frappe.get_doc("Salary Slip", ss.name)
-			#print "salary 1 = {}".format(frappe.as_json(salary))
-			salary.append("earnings", sd1)
-			salary.save()
-			#flag Timesheet Addition
-			frappe.db.sql("update `tabTimesheet Addition` set flag = 1 where name=%s", e.name)
+			# print "\n\n t.overtime_total = {}".format(t.overtime_total)
+			# print "\n\nt = {}".format(frappe.as_json(t))
+			timesheet = frappe.get_doc("Timesheet",t.name)
+			#print "timesheet.name = {}".format(frappe.as_json(timesheet.name))
 
-		deduction = frappe.get_list("Timesheet Deduction", fields=["*"],filters = [["timesheet","=",timesheet.name],["flag","not in",["1"]]])
-		print "deduction = {}".format(frappe.as_json(deduction))
-		for d in deduction:
-			sd2 = frappe.get_doc({"doctype": "Salary Detail","salary_component": d.salary_component, "amount": d.amount})
-			salary.append("deductions", sd2)
-			#print "salary 2 = {}".format(frappe.as_json(salary))
-			salary.save()
-			#flag Timesheet Deduction
-			frappe.db.sql("update `tabTimesheet Deduction` set flag = 1 where name=%s", d.name)
+			earning = frappe.get_list("Timesheet Addition", fields=["*"],filters = [["timesheet","=",timesheet.name],["flag","not in",["1"]]])
+			print "earning = {}".format(frappe.as_json(earning))
+			for e in earning:
+				sd1 = frappe.get_doc({"doctype": "Salary Detail","salary_component": e.salary_component, "amount": e.amount})
+				#print "ss.name  = {}".format(ss.name)
+				salary = frappe.get_doc("Salary Slip", ss.name)
+				#print "salary 1 = {}".format(frappe.as_json(salary))
+				salary.append("earnings", sd1)
+				salary.save()
+				#flag Timesheet Addition
+				frappe.db.sql("update `tabTimesheet Addition` set flag = 1 where name=%s", e.name)
 
-		frappe.db.commit()
+			deduction = frappe.get_list("Timesheet Deduction", fields=["*"],filters = [["timesheet","=",timesheet.name],["flag","not in",["1"]]])
+			print "deduction = {}".format(frappe.as_json(deduction))
+			for d in deduction:
+				sd2 = frappe.get_doc({"doctype": "Salary Detail","salary_component": d.salary_component, "amount": d.amount})
+				salary.append("deductions", sd2)
+				#print "salary 2 = {}".format(frappe.as_json(salary))
+				salary.save()
+				#flag Timesheet Deduction
+				frappe.db.sql("update `tabTimesheet Deduction` set flag = 1 where name=%s", d.name)
+
+			frappe.db.commit()
 	#from frappe.sessions import clear_cache
 	#	clear_cache('Salary Slip')
 	#frappe.reload_doctype('Salary Slip')

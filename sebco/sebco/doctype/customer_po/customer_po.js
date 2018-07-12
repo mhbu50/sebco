@@ -24,5 +24,31 @@ frappe.ui.form.on('Customer PO', {
 				});
 			}
 		});
+	},
+	onload:function(frm){
+		// console.log("frm.doc",frm.doc);
+		console.log("frm.doc.quotation ",frm.doc.quotation);
+		if(frm.doc.__islocal && frm.doc.quotation){
+		frappe.call({
+			"method": "frappe.client.get",
+			args: {
+				doctype: "Quotation",
+				name: frm.doc.quotation
+			},
+			callback: function (data) {
+				if(data.message){
+					console.log("data.message",data.message.items);
+					data.message.items.forEach(function(row) {
+						console.log("row = ",row);
+						var new_row = frm.add_child("activity_type");
+                new_row.activity_type = row.item_code;
+                new_row.item_name = row.item_name;
+                new_row.billing_rate = row.price_list_rate;
+					});
+					refresh_field("activity_type");
+				}
+			}
+		});
+	 }
 	}
 });

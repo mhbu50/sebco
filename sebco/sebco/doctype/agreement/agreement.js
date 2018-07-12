@@ -13,6 +13,5 @@ frappe.ui.form.on('Agreement', {
 		      frappe.new_doc("Quotation");
 		        }, __("Make"));
 		      }
-
 	}
 });
