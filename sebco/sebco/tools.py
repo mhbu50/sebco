@@ -102,12 +102,16 @@ def add_overtime_to_salaryslip(posting_date, start, end):
 				ot = frappe.get_doc({"doctype": "Salary Detail","salary_component": "Over Time", "amount": t.overtime_total})
 				salary.append("earnings", ot)
 				salary.save()
+				ss.overtime_hours = t.overtime_hours
+				ss.overtime_rate = t.overtime_rate
 				frappe.db.sql("update `tabTimesheet Addition` set flag = 1 where name=%s", ot.name)
 			# add Absent
 			if t.absent_total:
 				at = frappe.get_doc({"doctype": "Salary Detail","salary_component": "Absent", "amount": t.absent_total})
 				salary.append("deduction", at)
 				salary.save()
+				ss.absent_days = t.absent_days
+				ss.absent_rate = t.absent_rate
 				frappe.db.sql("update `tabTimesheet Addition` set flag = 1 where name=%s", at.name)
 
 			for e in earning:
