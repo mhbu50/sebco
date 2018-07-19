@@ -54,10 +54,48 @@ frappe.ui.form.on("Timesheet", {
             value.costing_amount = row.costing_rate * value.hours;
           }
 				});
-    		});
-   		}
+        });
+      }
    });
  }
+ },
+ customer_po:function(frm){
+   let at =[];
+  frappe.call({
+    "method": "frappe.client.get",
+    async: false,
+    args: {
+      doctype: "Customer PO",
+      name: frm.doc.customer_po
+    },
+      callback: function (data) {
+       data.message.activity_type.forEach(function(row){
+         console.log("row",row)
+         at.push(row.activity_type);
+
+       });
+       console.log("at = ",at);
+       //filter child table
+       cur_frm.fields_dict['time_logs'].grid.get_field('activity_type').get_query = function(doc) {
+         return {
+             filters: [[
+                 'Activity Type', 'activity_type', 'in', at
+             ]]
+         }
+       }
+       //filter dialog
+       frm.dialog.fields_dict['activity_type'].get_query = function(doc) {
+        return {
+            filters: [[
+                'Activity Type', 'activity_type', 'in', at
+            ]]
+        }
+      }
+     }
+  });
+ },
+ add_monthly:function(frm){
+  console.log("frm.dialog",frm.dialog);
  },
  overtime_hours:function(frm){
    frm.trigger("clc_overTime");

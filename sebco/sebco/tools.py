@@ -94,11 +94,24 @@ def add_overtime_to_salaryslip(posting_date, start, end):
 
 			earning = frappe.get_list("Timesheet Addition", fields=["*"],filters = [["timesheet","=",timesheet.name],["flag","not in",["1"]]])
 			print "earning = {}".format(frappe.as_json(earning))
+			#print "ss.name  = {}".format(ss.name)
+			#print "salary 1 = {}".format(frappe.as_json(salary))
+			salary = frappe.get_doc("Salary Slip", ss.name)
+			#add overtime
+			if t.overtime_total:
+				ot = frappe.get_doc({"doctype": "Salary Detail","salary_component": "Over Time", "amount": t.overtime_total})
+				salary.append("earnings", ot)
+				salary.save()
+				frappe.db.sql("update `tabTimesheet Addition` set flag = 1 where name=%s", ot.name)
+			# add Absent
+			if t.absent_total:
+				at = frappe.get_doc({"doctype": "Salary Detail","salary_component": "Absent", "amount": t.absent_total})
+				salary.append("deduction", at)
+				salary.save()
+				frappe.db.sql("update `tabTimesheet Addition` set flag = 1 where name=%s", at.name)
+
 			for e in earning:
 				sd1 = frappe.get_doc({"doctype": "Salary Detail","salary_component": e.salary_component, "amount": e.amount})
-				#print "ss.name  = {}".format(ss.name)
-				salary = frappe.get_doc("Salary Slip", ss.name)
-				#print "salary 1 = {}".format(frappe.as_json(salary))
 				salary.append("earnings", sd1)
 				salary.save()
 				#flag Timesheet Addition
@@ -121,17 +134,16 @@ def add_overtime_to_salaryslip(posting_date, start, end):
 	frappe.msgprint(_("OverTime/Absents are added to all Salary Slips"))
 
 def before_insert_item(doc, method):
-	msgprint("call me")
 	frappe.get_doc({
 	"doctype": "Activity Type",
-	"activity_type": doc.item_name}).save()
+	"activity_type": doc.item_code}).save()
 
 def disabled_agreemnt_po():
 	#Agreement
-	agreements = frappe.get_list("Agreement",filters={"end_date":today,"status":"Active")},fields=["*"])
+	agreements = frappe.get_list("Agreement",filters={"end_date":today,"status":"Active"},fields=["*"])
 	for a in agreements:
 		frappe.set_value(a.doctype, a.name, 'status','Disabled')
 	#Customer PO
-	customer_pos = frappe.get_list("Customer PO",filters={"end_date":today,"status":"Active")},fields=["*"])
+	customer_pos = frappe.get_list("Customer PO",filters={"end_date":today,"status":"Active"},fields=["*"])
 	for po in customer_pos:
 		frappe.set_value(po.doctype, po.name, 'status','Disabled')

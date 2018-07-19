@@ -14,6 +14,7 @@ frappe.ui.form.on('Customer PO', {
 					doc.customer = frm.doc.customer;
 					doc.customer_po = frm.doc.name;
 					doc.date_po = frm.doc.date;
+					doc.agreement = frm.doc.agreement;
 					$.each(activity_type, function(i, d) {
 						var row = frappe.model.add_child(doc, "activity_type");
 						row.activity_type = d.activity_type;
@@ -43,7 +44,7 @@ frappe.ui.form.on('Customer PO', {
 						var new_row = frm.add_child("activity_type");
                 new_row.activity_type = row.item_code;
                 new_row.item_name = row.item_name;
-                new_row.billing_rate = row.price_list_rate;
+                new_row.billing_rate = row.amount;
 					});
 					refresh_field("activity_type");
 				}
