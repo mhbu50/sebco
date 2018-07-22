@@ -100,11 +100,11 @@ frappe.ui.form.on("Timesheet", {
  overtime_hours:function(frm){
    frm.trigger("clc_overTime");
  },
- rate:function (frm) {
+ overtime_rate:function (frm) {
   frm.trigger("clc_overTime");
  },
  clc_overTime:function(frm){
-   frm.set_value("overtime_total",frm.doc.overtime_hours * frm.doc.rate);
+   frm.set_value("overtime_total",frm.doc.overtime_hours * frm.doc.overtime_rate);
    frm.refresh_fields("overtime_total");
  },
   absent_days:function(frm){
