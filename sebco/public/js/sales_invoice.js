@@ -19,8 +19,44 @@ frappe.ui.form.on("Sales Invoice", {
   				}
   			}
   		});
+      cur_frm.get_field('sales_order').get_query = function(doc) {
+        return {
+            filters: [[
+                'Sales Order', 'customer', '=',frm.doc.project,
+            ],[
+                'Sales Order', 'status', 'in',["To Deliver and Bill","To Bill","To Deliver"]
+            ]]
+        }
+      }
     }
   },
+  validate: function(frm){
+    if (frm.doc.status == "Unpaid"){
+      console.log();
+    frappe.call({
+			method: "erpnext.selling.doctype.sales_order.sales_order.update_status",
+			args: {status: "To Deliver", name: frm.doc.sales_order},
+			callback: function(r){
+				frm.reload_doc();
+			},
+			always: function() {
+				frappe.ui.form.is_saving = false;
+			}
+		});
+  }
+  if (frm.doc.status == "Paid"){
+  frappe.call({
+    method: "erpnext.selling.doctype.sales_order.sales_order.update_status",
+    args: {status: "Completed", name: frm.doc.sales_order},
+    callback: function(r){
+      frm.reload_doc();
+    },
+    always: function() {
+      frappe.ui.form.is_saving = false;
+    }
+  });
+}
+},
   project: function(frm){
     frm.doc.items = [];
     var new_row = frm.add_child("items");

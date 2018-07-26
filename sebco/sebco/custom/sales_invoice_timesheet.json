@@ -16,6 +16,7 @@
    "description": null, 
    "docstatus": 0, 
    "dt": "Sales Invoice Timesheet", 
+   "fetch_from": null, 
    "fieldname": "billing_rate", 
    "fieldtype": "Currency", 
    "hidden": 0, 

@@ -11,7 +11,9 @@ frappe.ui.form.on("Sales Order", {
       refresh_field("activity_type");
     }
 
-		if(frm.doc.customer){
+		if(frm.doc.customer && frm.doc.__islocal){
+			frm.set_value("project",frm.doc.customer);
+			frm.refresh_field("project");
       frappe.call({
   			"method": "frappe.client.get",
   			args: {
@@ -48,7 +50,7 @@ frappe.ui.form.on("Sales Order", {
                 // new_row.income_account = "0100001 - Sales - warehouse 01 - S";
               refresh_field("items");
               frm.trigger("qty");
-					}		
+					}
 	},
 	customer_po:function(frm){
 		console.log("frm.doc.customer_po",frm.doc.customer_po);
