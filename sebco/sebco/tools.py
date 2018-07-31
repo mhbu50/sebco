@@ -2,10 +2,12 @@ from __future__ import unicode_literals
 import frappe
 import json
 from frappe import _
+from erpnext import get_default_company
 from frappe.model.document import Document
 from frappe.utils import flt, today, getdate, add_years
 from frappe.model.document import Document
 from frappe.desk.notifications import get_filters_for
+from erpnext.hr.doctype.department.department import get_abbreviated_name
 
 
 @frappe.whitelist()
@@ -151,3 +153,24 @@ def disabled_agreemnt_po():
 	customer_pos = frappe.get_list("Customer PO",filters={"end_date":today,"status":"Active"},fields=["*"])
 	for po in customer_pos:
 		frappe.set_value(po.doctype, po.name, 'status','Disabled')
+
+def create_customer_account(doc, method):
+
+	account = frappe.get_doc({
+		"doctype": "Account",
+		"account_name": doc.customer_name,
+		"parent_account":"Accounts Receivable - FD",
+		"company": get_default_company(),
+		"is_group": 0,
+		"account_type": "Receivable",
+	}).insert()
+
+	account_party = frappe.get_doc({
+		"doctype": "Party Account",
+		"company": get_default_company(),
+		"account": get_abbreviated_name(account.account_name,get_default_company())
+	})
+
+
+	doc.append("accounts", account_party)
+	doc.save()

@@ -86,8 +86,10 @@ doctype_js = {"Sales Order" : "public/js/sales_order.js",
 
 doc_events = {
 	"Item": {
-		"before_insert": "sebco.sebco.tools.before_insert_item",
-
+		"before_insert": "sebco.sebco.tools.before_insert_item"
+	},
+	"Customer":{
+	"after_insert":"sebco.sebco.tools.create_customer_account"
 	}
 }
 
