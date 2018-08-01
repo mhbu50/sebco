@@ -159,7 +159,7 @@ def create_customer_account(doc, method):
 	account = frappe.get_doc({
 		"doctype": "Account",
 		"account_name": doc.customer_name,
-		"parent_account":"Accounts Receivable - FD",
+		"parent_account":get_abbreviated_name(Accounts Receivable,get_default_company()),
 		"company": get_default_company(),
 		"is_group": 0,
 		"account_type": "Receivable",
