@@ -90,6 +90,12 @@ doc_events = {
 	},
 	"Customer":{
 	"after_insert":"sebco.sebco.tools.create_customer_account"
+	},
+	"Supplier":{
+	"after_insert":"sebco.sebco.tools.create_supplier_account"
+	},
+	"Employee":{
+	"after_insert":"sebco.sebco.tools.create_employee_account"
 	}
 }
 

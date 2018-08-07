@@ -7,7 +7,6 @@ from frappe.model.document import Document
 from frappe.utils import flt, today, getdate, add_years
 from frappe.model.document import Document
 from frappe.desk.notifications import get_filters_for
-from erpnext.hr.doctype.department.department import get_abbreviated_name
 
 
 @frappe.whitelist()
@@ -154,12 +153,18 @@ def disabled_agreemnt_po():
 	for po in customer_pos:
 		frappe.set_value(po.doctype, po.name, 'status','Disabled')
 
-def create_customer_account(doc, method):
+def get_last_number(parent_account):
+	last_acct_num = frappe.get_all('Account',fields=['account_number'], filters={'parent_account': parent_account,'is_group':0},order_by='account_number desc', limit=1)[0]['account_number']
+	return last_acct_num
 
+def create_customer_account(doc, method):
+	last_number = get_last_number("003 - Customer account - S")
+	new_number = int(last_number[-4:])+1
 	account = frappe.get_doc({
 		"doctype": "Account",
 		"account_name": doc.customer_name,
-		"parent_account":get_abbreviated_name("Accounts Receivable",get_default_company()),
+		"account_number":"003"+str("{0:0>4}".format(new_number)),
+		"parent_account":"003 - Customer account - S",
 		"company": get_default_company(),
 		"is_group": 0,
 		"account_type": "Receivable",
@@ -168,9 +173,55 @@ def create_customer_account(doc, method):
 	account_party = frappe.get_doc({
 		"doctype": "Party Account",
 		"company": get_default_company(),
-		"account": get_abbreviated_name(account.account_name,get_default_company())
+		"account":account.account_number+ " - " + account.account_name +" - S"
 	})
 
+	doc.append("accounts", account_party)
+	doc.customer_number="003"+str("{0:0>4}".format(new_number)),
+	doc.save()
+
+def create_supplier_account(doc, method):
+	last_number = get_last_number("004 - Supplier account - S")
+	new_number = int(last_number[-4:])+1
+	account = frappe.get_doc({
+		"doctype": "Account",
+		"account_name": doc.supplier_name,
+		"account_number":"4"+str("{0:0>4}".format(new_number)),
+		"parent_account":"004 - Supplier account - S",
+		"company": get_default_company(),
+		"is_group": 0,
+		"account_type": "Payable",
+	}).insert()
+
+	account_party = frappe.get_doc({
+		"doctype": "Party Account",
+		"company": get_default_company(),
+		"account":account.account_number+ " - " + account.account_name +" - S"
+	})
 
 	doc.append("accounts", account_party)
+	doc.save()
+
+def create_employee_account(doc, method):
+	print "\n\n\n create_employee_account\n\n\n"
+	last_number = get_last_number("005 - Employee account - S")
+	new_number = int(last_number[-4:])+1
+	account = frappe.get_doc({
+		"doctype": "Account",
+		"account_name": doc.employee_name,
+		"account_number":"005"+str("{0:0>4}".format(new_number)),
+		"parent_account":"005 - Employee account - S",
+		"company": get_default_company(),
+		"is_group": 0
+		# "account_type": "Payable",
+	}).insert()
+
+	account_party = frappe.get_doc({
+		"doctype": "Party Account",
+		"company": get_default_company(),
+		"account":account.account_number+ " - " + account.account_name +" - S"
+	})
+
+	doc.append("accounts", account_party)
+	doc.employee_number="005"+str("{0:0>4}".format(new_number)),
 	doc.save()
