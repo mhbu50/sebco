@@ -177,7 +177,8 @@ def create_customer_account(doc, method):
 	})
 
 	doc.append("accounts", account_party)
-	doc.customer_number="003"+str("{0:0>4}".format(new_number)),
+	doc.customer_number="003"+str("{0:0>4}".format(new_number))
+	doc.customer_name = doc.customer_number + " - "+ doc.customer_name
 	doc.save()
 
 def create_supplier_account(doc, method):
